@@ -16,7 +16,7 @@ class CpCybos:
         if self.disp.IsConnect != 1:
             raise Exception('Not Connected')
         else:
-        print("Ok) CpCybos Connected")
+            print("Ok) CpCybos Connected")
 
         return None
 
@@ -124,77 +124,77 @@ class CpCodeMgr:
         self.disp = win32com.client.Dispatch('CpUtil.CpCodeMgr')
     def CodeToName(self, code):
         return self.disp.CodeToName(code)
-    def GetStockMarginRate(self, code):
+    def get_stk_MarginRate(self, code):
         return self.disp.GetStockMarginRate(code)
-    def GetStockMemeMin(self, code):
+    def get_stk_MemeMin(self, code):
         return self.disp.GetStockMemeMin(code)
-    def GetStockIndustryCode(self, code):
+    def get_stk_IndustryCode(self, code):
         return self.disp.GetStockIndustryCode(code)
-    def GetStockMarketKind(self, code):
+    def get_stk_MarketKind(self, code):
         return self.disp.GetStockMarketKind(code)
-    def GetStockControlKind(self, code):
+    def get_stk_ControlKind(self, code):
         return self.disp.GetStockControlKind(code)
-    def GetStockSupervisionKind(self, code):
+    def get_stk_SupervisionKind(self, code):
         return self.disp.GetStockSupervisionKind(code)
-    def GetStockStatusKind(self, code):
+    def get_stk_StatusKind(self, code):
         return self.disp.GetStockStatusKind(code)
-    def GetStockCapital(self, code):
+    def get_stk_Capital(self, code):
         return self.disp.GetStockCapital(code)
-    def GetStockFiscalMonth(self, code):
+    def get_stk_FiscalMonth(self, code):
         return self.disp.GetStockFiscalMonth(code)
-    def GetStockGroupCode(self, code):
+    def get_stk_GroupCode(self, code):
         return self.disp.GetStockGroupCode(code)
-    def GetStockKospi200Kind(self, code):
+    def get_stk_Kospi200Kind(self, code):
         return self.disp.GetStockKospi200Kind(code)
-    def GetStockSectionKind(self, code):
+    def get_stk_SectionKind(self, code):
         return self.disp.GetStockSectionKind(code)
-    def GetStockLacKind(self, code):
+    def get_stk_LacKind(self, code):
         return self.disp.GetStockLacKind(code)
-    def GetStockListedDate(self, code):
+    def get_stk_ListedDate(self, code):
         return self.disp.GetStockListedDate(code)
-    def GetStockMaxPrice(self, code):
+    def get_stk_MaxPrice(self, code):
         return self.disp.GetStockMaxPrice(code)
-    def GetStockMinPrice(self, code):
+    def get_stk_MinPrice(self, code):
         return self.disp.GetStockMinPrice(code)
-    def GetStockParPrice(self, code):
+    def get_stk_ParPrice(self, code):
         return self.disp.GetStockParPrice(code)
-    def GetStockStdPrice(self, code):
+    def get_stk_StdPrice(self, code):
         return self.disp.GetStockStdPrice(code)
-    def GetStockYdOpenPrice(self, code):
+    def get_stk_YdOpenPrice(self, code):
         return self.disp.GetStockYdOpenPrice(code)
-    def GetStockYdHighPrice(self, code):
+    def get_stk_YdHighPrice(self, code):
         return self.disp.GetStockYdHighPrice(code)
-    def GetStockYdLowPrice(self, code):
+    def get_stk_YdLowPrice(self, code):
         return self.disp.GetStockYdLowPrice(code)
-    def GetStockYdClosePrice(self, code):
+    def get_stk_YdClosePrice(self, code):
         return self.disp.GetStockYdClosePrice(code)
     def IsStockCreditEnable(self, code):
         return self.disp.IsStockCreditEnable(code)
-    def GetStockParPriceChageType(self, code):
+    def get_stk_ParPriceChageType(self, code):
         return self.disp.GetStockParPriceChageType(code)
-    def GetStockElwBasketCodeList(self, code):
+    def get_stk_ElwBasketCodeList(self, code):
         return self.disp.GetStockElwBasketCodeList(code)
-    def GetStockElwBasketCompList(self, code):
+    def get_stk_ElwBasketCompList(self, code):
         return self.disp.GetStockElwBasketCompList(code)
-    def GetStockListByMarket(self, code):
+    def get_stk_ListByMarket(self, code):
         return self.disp.GetStockListByMarket(code)
-    def GetGroupCodeList(self, code):
+    def get_GroupCodeList(self, code):
         return self.disp.GetGroupCodeList(code)
-    def GetGroupName(self, code):
+    def get_GroupName(self, code):
         return self.disp.GetGroupName(code)
-    def GetIndustryName(self, code):
+    def get_IndustryName(self, code):
         return self.disp.GetIndustryName(code)
-    def GetMemberList (self):
+    def get_MemberList (self):
         return self.disp.GetMemberList()
-    def GetMemberName(self, code):
+    def get_MemberName(self, code):
         return self.disp.GetMemberName(code)
-    def GetKosdaqIndustry1List (self):
+    def get_KosdaqIndustry1List (self):
         return self.disp.GetKosdaqIndustry1List ()
-    def GetKosdaqIndustry2List (self):
+    def get_KosdaqIndustry2List (self):
         return self.disp.GetKosdaqIndustry2List ()
-    def GetMarketStartTime(self):
+    def get_MarketStartTime(self):
         return self.disp.GetMarketStartTime()
-    def GetMarketEndTime(self):
+    def get_MarketEndTime(self):
         return self.disp.GetMarketEndTime()
 
     # def is_common_stock(self, code):

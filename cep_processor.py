@@ -24,15 +24,24 @@ def opt_echo(serieses, key, dat):
     print('OPT:%s, dat:%s'% (key[3:], dat))  # opt slice
 
 
+def gen_eproc(observers=[]):
+    e_proc = EventProcessor()
+    e_proc.add_observer(['stk*_A*'], stk_echo)
+    e_proc.add_observer(['fut*_*'], fut_echo)
+    e_proc.add_observer(['opt*_*'], opt_echo)
+    # e_proc.start()
+    return e_proc
+
+
 class EventProcessor(multiprocessing.Process):
     def __init__(self, deque_size=4096):
         super(EventProcessor, self).__init__()
-        self.q_buf         = multiprocessing.Queue() #입력 버퍼
-        self.o_buf         = multiprocessing.Queue() # 옵저버 버퍼
-        self.observers     = dict() # 옵저버집합
-        self.observer_list = []     # 옵저버 리스트
-        self.serieses      = dict() # 시계열집합
-        self.DQ_SIZE       = deque_size
+        self.q_buf = multiprocessing.Queue()  #입력 버퍼
+        self.o_buf = multiprocessing.Queue()  # 옵저버 버퍼
+        self.observers = dict()  # 옵저버집합
+        self.observer_list = []  # 옵저버 리스트
+        self.serieses = dict()  # 시계열집합
+        self.DQ_SIZE = deque_size
 
     def add_observer(self, key_patterns, callable):
         self.o_buf.put((key_patterns,callable))
@@ -46,7 +55,7 @@ class EventProcessor(multiprocessing.Process):
             try:
                 # 입력큐에서 하나 가져온다.
                 itm = self.q_buf.get(timeout=1)
-                ts  = itm[0] # push 메서드에서 넣은 순서
+                ts = itm[0]  # push 메서드에서 넣은 순서
                 key = itm[1]
                 dat = itm[2]
 
