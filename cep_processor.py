@@ -17,8 +17,8 @@ def stk_echo(serieses, key, dat):
 
 
 def fut_echo(serieses, key, dat):
-    print('FUT:%s, dat:%s'% (key[3:], dat))  # fut slice
-
+    futtype, code = key[:4], key[5:]
+    print('%4s) %-8s [%s]' % (futtype, code, dat))  # fut slice
 
 def opt_echo(serieses, key, dat):
     print('OPT:%s, dat:%s'% (key[3:], dat))  # opt slice
@@ -27,8 +27,9 @@ def opt_echo(serieses, key, dat):
 def gen_eproc(observers=[]):
     e_proc = EventProcessor()
     e_proc.add_observer(['stk*_A*'], stk_echo)
-    e_proc.add_observer(['fut*_*'], fut_echo)
-    e_proc.add_observer(['opt*_*'], opt_echo)
+    e_proc.add_observer(['*_*'], fut_echo)
+    # e_proc.add_observer(['fut*_*'], fut_echo)
+    # e_proc.add_observer(['opt*_*'], opt_echo)
     # e_proc.start()
     return e_proc
 
@@ -48,7 +49,7 @@ class EventProcessor(multiprocessing.Process):
 
     def push(self, key, data):
         ts = time.time()
-        self.q_buf.put((ts,key,data))
+        self.q_buf.put((ts, key, data))
 
     def run(self):
         while True:

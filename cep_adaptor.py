@@ -15,7 +15,7 @@ import time
 #  만들어준다.
 #############################################################
 
-def CpRqRpClass(com_str):
+def CpRqRp(com_str):
     def ret_decoclass(usr_cls):
         def usrcls_wrap(*args, **kwargs):
             # request , response 메서드를 반드시 만들도록 한다.
@@ -65,7 +65,7 @@ def CpRqRpClass(com_str):
 #  사용자가 의도적으로 구분을 지어 사용하면 좋을것이다.
 #############################################################
 
-def CpSubPubClass(com_str):
+def CpSbPb(com_str):
     def ret_decoclass(usr_cls):
         def usrcls_wrap(*args, **kwargs):
             # subscribe , publish 메서드를 반드시 만들도록 한다.
@@ -113,6 +113,39 @@ def CpSubPubClass(com_str):
         return usrcls_wrap
     return ret_decoclass
 
+# import win32event
+#
+# def MessagePump(timeout):
+#     StopEvent = win32event.CreateEvent(None, 0, 0, None)
+#     waitables = [StopEvent]
+#     while 1:
+#         rc = win32event.MsgWaitForMultipleObjects(
+#             waitables,
+#             0,  # Wait for all = false, so it waits for anyone
+#             timeout,  # (or win32event.INFINITE)
+#             win32event.QS_ALLEVENTS)  # Accepts all input
+#
+#         if rc == win32event.WAIT_OBJECT_0:
+#             # Our first event listed, the StopEvent, was triggered, so we must exit
+#             print('stop event')
+#             break
+#
+#         elif rc == win32event.WAIT_OBJECT_0 + len(waitables):
+#             # A windows message is waiting - take care of it. (Don't ask me
+#             # why a WAIT_OBJECT_MSG isn't defined < WAIT_OBJECT_0...!).
+#             # This message-serving MUST be done for COM, DDE, and other
+#             # Windowsy things to work properly!
+#             print('pump')
+#             if pythoncom.PumpWaitingMessages():
+#                 break  # we received a wm_quit message
+#         elif rc == win32event.WAIT_TIMEOUT:
+#             print('timeout')
+#             return
+#             pass
+#         else:
+#             print('exception')
+#             raise RuntimeError("unexpected win32wait return value")
+#
 
 #############################################################
 #

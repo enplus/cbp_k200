@@ -1,8 +1,9 @@
 # coding=utf-8
 from CpUtil import *
-from cep_cpDib import *
-
+from cep_stk import *
+from cep_futopt import *
 from cep_processor import *
+
 import pythoncom
 import time
 
@@ -17,16 +18,16 @@ evntproc = None
 #     print('key:%s, dat:%s'% (key, dat))
 
 if __name__ == "__main__":
+    cpUtil = CpCybos()
+    cpStk = CpStockCode()
 
-    cpCybos = CpCybos()
-    cpStkCod = CpStockCode()
-
-    cpCybos.get_is_connect()
+    cpUtil.get_is_connect()
 
     evntproc = gen_eproc()
     evntproc.start()
 
     stkList = ['A252670', 'A005930']
+    foList = ['101R3', '105R2', '111R2', '120R2']
 
     # 이벤트 처리기 세팅
     # evntproc = EventProcessor()
@@ -37,12 +38,23 @@ if __name__ == "__main__":
     # evntproc.add_observer(['opt*_*'], opt_echo)
 
     # 현재가, 매수매도구분, 순간체결량을 생산
-    # stkcur1 = StkCur('A252670')
-    # stkcur1.subscribe()
+    # stkcur = StkCur('A252670')
+    # stkcur.subscribe()
 
+    # Sbpb
     stkbid = StkBid()
     stkbid.setInitData(stkList, evntproc)
     stkbid.subscribe()
+
+    # RqRp
+    foMst = FutOptMst()
+    foMst.setInitData(foList, evntproc)
+    foMst.request()
+
+    # eurex = EurexJpbid()
+    # eurex.setInitData('105R2', evntproc)
+
+    # cpStk.code2name('A005930')
 
     ##############################################
     # WinCOM32 이벤트 생성,

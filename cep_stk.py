@@ -1,13 +1,12 @@
-from cep_adaptor import CpSubPubClass
-from cep_adaptor import CpRqRpClass
-
+from cep_adaptor import CpSbPb
+from cep_adaptor import CpRqRp
 
 ###################################################
 # Adaptors : 발생한 이벤트를 처리기에 전달하는 역할
 #
 ###################################################
 # 주식 호가잔량
-@CpSubPubClass('dscbo1.StockJpBid')
+@CpSbPb('dscbo1.StockJpBid')
 class StkBid:
     def __init__(self):
         self.itm_cod = None
@@ -43,11 +42,12 @@ class StkBid:
             tlist.append(itm)
 
         # 이벤트 처리기에 전달
-        self.eproc.push('stkbid_%s' % itm_cod, tlist)
+        if self.eproc is not None:
+            self.eproc.push('stkbid_%s' % itm_cod, tlist)
 
 
 # 주식 현재가
-@CpSubPubClass('dscbo1.StockCur')
+@CpSbPb('dscbo1.StockCur')
 class StkCur:
     def __init__(self):
         self.itm_cod = None
@@ -70,3 +70,4 @@ class StkCur:
 
         # 이벤트처리기에 전달
         self.evntproc.push('cls_%s'% (self.itm_cod), (nowpr, chr(sellbuy), clsqty))
+

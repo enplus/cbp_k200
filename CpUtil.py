@@ -122,78 +122,115 @@ class CpCodeMgr:
 
     def __init__(self):
         self.disp = win32com.client.Dispatch('CpUtil.CpCodeMgr')
+
     def CodeToName(self, code):
         return self.disp.CodeToName(code)
+
     def get_stk_MarginRate(self, code):
         return self.disp.GetStockMarginRate(code)
+
     def get_stk_MemeMin(self, code):
         return self.disp.GetStockMemeMin(code)
+
     def get_stk_IndustryCode(self, code):
         return self.disp.GetStockIndustryCode(code)
+
     def get_stk_MarketKind(self, code):
         return self.disp.GetStockMarketKind(code)
+
     def get_stk_ControlKind(self, code):
         return self.disp.GetStockControlKind(code)
+
     def get_stk_SupervisionKind(self, code):
         return self.disp.GetStockSupervisionKind(code)
+
     def get_stk_StatusKind(self, code):
         return self.disp.GetStockStatusKind(code)
+
     def get_stk_Capital(self, code):
         return self.disp.GetStockCapital(code)
+
     def get_stk_FiscalMonth(self, code):
         return self.disp.GetStockFiscalMonth(code)
+
     def get_stk_GroupCode(self, code):
         return self.disp.GetStockGroupCode(code)
+
     def get_stk_Kospi200Kind(self, code):
         return self.disp.GetStockKospi200Kind(code)
+
     def get_stk_SectionKind(self, code):
         return self.disp.GetStockSectionKind(code)
+
     def get_stk_LacKind(self, code):
         return self.disp.GetStockLacKind(code)
+
     def get_stk_ListedDate(self, code):
         return self.disp.GetStockListedDate(code)
+
     def get_stk_MaxPrice(self, code):
         return self.disp.GetStockMaxPrice(code)
+
     def get_stk_MinPrice(self, code):
         return self.disp.GetStockMinPrice(code)
+
     def get_stk_ParPrice(self, code):
         return self.disp.GetStockParPrice(code)
+
     def get_stk_StdPrice(self, code):
         return self.disp.GetStockStdPrice(code)
+
     def get_stk_YdOpenPrice(self, code):
         return self.disp.GetStockYdOpenPrice(code)
+
     def get_stk_YdHighPrice(self, code):
         return self.disp.GetStockYdHighPrice(code)
+
     def get_stk_YdLowPrice(self, code):
         return self.disp.GetStockYdLowPrice(code)
+
     def get_stk_YdClosePrice(self, code):
         return self.disp.GetStockYdClosePrice(code)
+
     def IsStockCreditEnable(self, code):
         return self.disp.IsStockCreditEnable(code)
+
     def get_stk_ParPriceChageType(self, code):
         return self.disp.GetStockParPriceChageType(code)
+
     def get_stk_ElwBasketCodeList(self, code):
         return self.disp.GetStockElwBasketCodeList(code)
+
     def get_stk_ElwBasketCompList(self, code):
         return self.disp.GetStockElwBasketCompList(code)
+
     def get_stk_ListByMarket(self, code):
         return self.disp.GetStockListByMarket(code)
+
     def get_GroupCodeList(self, code):
         return self.disp.GetGroupCodeList(code)
+
     def get_GroupName(self, code):
         return self.disp.GetGroupName(code)
+
     def get_IndustryName(self, code):
         return self.disp.GetIndustryName(code)
+
     def get_MemberList (self):
         return self.disp.GetMemberList()
+
     def get_MemberName(self, code):
         return self.disp.GetMemberName(code)
+
     def get_KosdaqIndustry1List (self):
         return self.disp.GetKosdaqIndustry1List ()
+
     def get_KosdaqIndustry2List (self):
         return self.disp.GetKosdaqIndustry2List ()
+
     def get_MarketStartTime(self):
         return self.disp.GetMarketStartTime()
+
     def get_MarketEndTime(self):
         return self.disp.GetMarketEndTime()
 
@@ -268,9 +305,11 @@ def getCommonStockCods():
     ret.sort()
     return ret
 
+
 class QuitCls:
     def __init__(self):
         self.quit =True
+
 
 def generatorIntervalRequest(q, waitTick=250, limitType=CpCybos.LT_NONTRADE_REQUEST):
     '''
