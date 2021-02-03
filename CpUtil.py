@@ -2,6 +2,7 @@
 import win32com
 import win32com.client
 import queue
+import ctypes
 
 
 class CpCybos:
@@ -13,10 +14,14 @@ class CpCybos:
         self.disp = win32com.client.Dispatch('CpUtil.CpCybos')
 
     def get_is_connect(self):
-        if self.disp.IsConnect != 1:
-            raise Exception('Not Connected')
+        # 관리자 권한으로 프로세스 실행 여부
+        if not ctypes.windll.shell32.IsUserAnAdmin():
+            raise Exception('check_creon_system() : admin user -> FAILED')
         else:
-            print("Ok) CpCybos Connected")
+            if self.disp.IsConnect != 1:
+                raise Exception('Not Connected')
+            else:
+                print("Ok) CpCybos Connected")
 
         return None
 

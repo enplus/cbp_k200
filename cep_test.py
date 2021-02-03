@@ -4,11 +4,16 @@ from cep_stk import *
 from cep_futopt import *
 from cep_processor import *
 
+from k200_config import *
+
 import pythoncom
 import time
 
 # 이벤트 처리기, 이 모듈이 실행될시 할당됨
 evntproc = None
+
+# global var
+g_mmcd = 'R2'
 
 ###################################################
 # Observers : 자신의 키 패턴에 매칭되는 이벤트를 처리함
@@ -18,6 +23,7 @@ evntproc = None
 #     print('key:%s, dat:%s'% (key, dat))
 
 if __name__ == "__main__":
+
     cpUtil = CpCybos()
     cpStk = CpStockCode()
 
@@ -26,8 +32,15 @@ if __name__ == "__main__":
     evntproc = gen_eproc()
     evntproc.start()
 
-    stkList = ['A252670', 'A005930']
-    foList = ['101R3', '105R2', '111R2', '120R2']
+    StkFutList = ['1' + x[0] + g_mmcd + '000' for x in SFO_INFO]
+
+    etfList = ['A252670', 'A005930']
+    undrList = [x[2] for x in SFO_INFO]  # 3번째필드 = 기초자산
+
+    stkList = etfList + undrList
+
+    # 행사가코드 추가 필요
+    # optList = ['2' + x[0] + g_mmcd for x in SFO_INFO if x[1] == 1]
 
     # 이벤트 처리기 세팅
     # evntproc = EventProcessor()
@@ -42,14 +55,14 @@ if __name__ == "__main__":
     # stkcur.subscribe()
 
     # Sbpb
-    stkbid = StkBid()
-    stkbid.setInitData(stkList, evntproc)
-    stkbid.subscribe()
+    stkBid = StkBid()
+    stkBid.setInitData(stkList, evntproc)
+    stkBid.subscribe()
 
-    # RqRp
-    foMst = FutOptMst()
-    foMst.setInitData(foList, evntproc)
-    foMst.request()
+    # Sbpb
+    futBid = FutureJpbid()
+    futBid.setInitData(StkFutList, evntproc)
+    futBid.subscribe()
 
     # eurex = EurexJpbid()
     # eurex.setInitData('105R2', evntproc)

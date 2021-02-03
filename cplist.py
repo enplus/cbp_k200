@@ -53,8 +53,6 @@
 # CmeBidOnly = class_factory('CpSysDib.CmeBidOnly')
 # CmeCurOnly = class_factory('CpSysDib.CmeCurOnly')
 # CmeCurr = class_factory('CpSysDib.CmeCurr')
-# FutureJpBid = class_factory('CpSysDib.FutureJpBid')
-# OptionJpBid = class_factory('CpSysDib.OptionJpBid')
 # CWList = class_factory('CpSysDib.CWList')
 # NStockMst = class_factory('CpSysDib.NStockMst')
 # NStockCur = class_factory('CpSysDib.NStockCur')
@@ -244,3 +242,5 @@
 # CpTd9197 = class_factory('CpTrade.CpTd9197')
 # CpTd0711AtmAll = class_factory('CpTrade.CpTd0711AtmAll')
 
+# ('CpSysDib.FutureJpBid')
+# ('CpSysDib.OptionJpBid')

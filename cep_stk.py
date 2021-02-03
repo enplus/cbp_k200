@@ -30,20 +30,70 @@ class StkBid:
                 com_obj.Subscribe()
 
     def publish(self, com_obj):
-        tlist = []
         itm_cod = com_obj.GetHeaderValue(0)
-        for i in range(3, 23, 4):
-            itm = (
-                com_obj.GetHeaderValue(i+0),
-                com_obj.GetHeaderValue(i+1),
-                com_obj.GetHeaderValue(i+2),
-                com_obj.GetHeaderValue(i+3)
-            )
-            tlist.append(itm)
+        time = com_obj.GetHeaderValue(1) * 100
 
-        # 이벤트 처리기에 전달
-        if self.eproc is not None:
-            self.eproc.push('stkbid_%s' % itm_cod, tlist)
+        bidpr = [
+            com_obj.GetHeaderValue(4),
+            com_obj.GetHeaderValue(8),
+            com_obj.GetHeaderValue(12),
+            com_obj.GetHeaderValue(16),
+            com_obj.GetHeaderValue(20),
+        ]
+
+        bidqty = [
+            com_obj.GetHeaderValue(6),
+            com_obj.GetHeaderValue(10),
+            com_obj.GetHeaderValue(14),
+            com_obj.GetHeaderValue(18),
+            com_obj.GetHeaderValue(22),
+        ]
+
+        bid_lpqty = [
+            com_obj.GetHeaderValue(48),
+            com_obj.GetHeaderValue(50),
+            com_obj.GetHeaderValue(52),
+            com_obj.GetHeaderValue(54),
+            com_obj.GetHeaderValue(56),
+        ]
+
+        askpr = [
+            com_obj.GetHeaderValue(3),
+            com_obj.GetHeaderValue(7),
+            com_obj.GetHeaderValue(11),
+            com_obj.GetHeaderValue(15),
+            com_obj.GetHeaderValue(19),
+        ]
+
+        askqty = [
+            com_obj.GetHeaderValue(5),
+            com_obj.GetHeaderValue(9),
+            com_obj.GetHeaderValue(13),
+            com_obj.GetHeaderValue(17),
+            com_obj.GetHeaderValue(21),
+        ]
+
+        ask_lpqty = [
+            com_obj.GetHeaderValue(47),
+            com_obj.GetHeaderValue(49),
+            com_obj.GetHeaderValue(51),
+            com_obj.GetHeaderValue(53),
+            com_obj.GetHeaderValue(55),
+        ]
+
+        bids, asks = [], []
+        for p, q, lp in zip(bidpr, bidqty, bid_lpqty):
+            bids.append((p, q, 0, lp))
+
+        for p, q, lp in zip(askpr, askqty, ask_lpqty):
+            asks.append((p, q, 0, lp))
+
+        data = {'bids': bids, 'asks': asks}
+        print('%s) %s %s' % (time, itm_cod, data))
+
+        # # 이벤트 처리기에 전달
+        # if self.eproc is not None:
+        #     self.eproc.push('stkbid_%s' % itm_cod, tlist)
 
 
 # 주식 현재가

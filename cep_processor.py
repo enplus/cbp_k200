@@ -13,8 +13,7 @@ import time
 
 # 호가변경시 출력
 def stk_echo(serieses, key, dat):
-    print('STK:%s, dat:%s'% (key[3:], dat))  # stk slice
-
+    print('STK:%s, dat:%s' % (key[3:], dat))  # stk slice
 
 def fut_echo(serieses, key, dat):
     futtype, code = key[:4], key[5:]
@@ -23,11 +22,15 @@ def fut_echo(serieses, key, dat):
 def opt_echo(serieses, key, dat):
     print('OPT:%s, dat:%s'% (key[3:], dat))  # opt slice
 
+def tmp_echo(serieses, key, dat):
+    print("('%s', '%s', )," % (key, dat))  # fut slice
+
 
 def gen_eproc(observers=[]):
     e_proc = EventProcessor()
     e_proc.add_observer(['stk*_A*'], stk_echo)
-    e_proc.add_observer(['*_*'], fut_echo)
+    e_proc.add_observer(['fut*_*'], fut_echo)
+    e_proc.add_observer(['#*'], tmp_echo)
     # e_proc.add_observer(['fut*_*'], fut_echo)
     # e_proc.add_observer(['opt*_*'], opt_echo)
     # e_proc.start()
