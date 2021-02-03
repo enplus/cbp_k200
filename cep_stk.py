@@ -106,7 +106,7 @@ class StkCur:
     def setInitData(self, itm_cod=None, evntProc=None):
         self.itm_cod = itm_cod
         self.eproc = evntProc
-        print('# STKCUR Init: %s' % self.itm_cod)
+        print('# StkCur Init: %s' % self.itm_cod)
 
     def subscribe(self, com_obj):
         com_obj.Unsubscribe()
@@ -114,10 +114,14 @@ class StkCur:
         com_obj.Subscribe()
 
     def publish(self, com_obj):
-        nowpr    = com_obj.GetHeaderValue(13) # 현재가
-        sellbuy  = com_obj.GetHeaderValue(14) # 매수매도구분(체결시)
-        clsqty   = com_obj.GetHeaderValue(17) # 순간체결수량
+        itm_cod = com_obj.GetHeaderValue(0)
+        time = com_obj.GetHeaderValue(3)
+        time = com_obj.GetHeaderValue(18)
+
+        nowpr = com_obj.GetHeaderValue(13)
+        sllbuy = com_obj.GetHeaderValue(14)
+        clsqty = '매도' if com_obj.GetHeaderValue(17) == '1' else '매수'
 
         # 이벤트처리기에 전달
-        self.evntproc.push('cls_%s'% (self.itm_cod), (nowpr, chr(sellbuy), clsqty))
+        self.evntproc.push('cls_%s'% (itm_cod), (nowpr, chr(sllbuy), clsqty))
 

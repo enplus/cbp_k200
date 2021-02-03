@@ -64,6 +64,8 @@ if __name__ == "__main__":
     futBid.setInitData(StkFutList, evntproc)
     futBid.subscribe()
 
+    futCur = FutureJpbid()
+    stkCur = StkCur()
     # eurex = EurexJpbid()
     # eurex.setInitData('105R2', evntproc)
 
