@@ -10,10 +10,14 @@ import pythoncom
 import time
 
 # 이벤트 처리기, 이 모듈이 실행될시 할당됨
+
 evntproc = None
+g_sbcnt = 0   # 최대 400건 제한
 
 # global var
 g_mmcd = 'R2'
+g_cpcybos = CpCybos()
+g_cpStk = CpStockCode()
 
 ###################################################
 # Observers : 자신의 키 패턴에 매칭되는 이벤트를 처리함
@@ -24,10 +28,7 @@ g_mmcd = 'R2'
 
 if __name__ == "__main__":
 
-    cpUtil = CpCybos()
-    cpStk = CpStockCode()
-
-    cpUtil.get_is_connect()
+    g_cpcybos.get_is_connect()
 
     evntproc = gen_eproc()
     evntproc.start()
@@ -57,19 +58,24 @@ if __name__ == "__main__":
     # Sbpb
     stkBid = StkBid()
     stkBid.setInitData(stkList, evntproc)
+
     stkBid.subscribe()
 
-    # Sbpb
-    futBid = FutureJpbid()
-    futBid.setInitData(StkFutList, evntproc)
-    futBid.subscribe()
+    # # Sbpb
+    # futBid = FutureJpbid()
+    # futBid.setInitData(StkFutList, evntproc)
+    # futBid.subscribe()
 
-    futCur = FutureJpbid()
+    # futCur = FutureJpbid()
+
     stkCur = StkCur()
+    stkCur.setInitData(stkList, evntproc)
+    stkCur.subscribe()
+
     # eurex = EurexJpbid()
     # eurex.setInitData('105R2', evntproc)
 
-    # cpStk.code2name('A005930')
+    # g_cpStk.code2name('A005930')
 
     ##############################################
     # WinCOM32 이벤트 생성,

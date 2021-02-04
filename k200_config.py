@@ -5,6 +5,7 @@ SLACKER_ENCID = 'C01LGKJE11R'
 # slack = Slacker(SLACKER_OAUTH)
 # slack.chat.post_message(SLACKER_ENCID, 'Hello fellow slackers!')
 
+CYBOS_SB_LIMIT = 400
 YY_CODE = [
     (2021, 'R'), (2022, 'S'), (2023, 'T')
     ]

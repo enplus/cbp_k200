@@ -89,7 +89,6 @@
 # StockWeek = class_factory('dscbo1.StockWeek')
 # CbGraph1 = class_factory('dscbo1.CbGraph1')
 # FutureMst = class_factory('dscbo1.FutureMst')
-# FutureCurr = class_factory('dscbo1.FutureCurr')
 # FutureIndexi = class_factory('dscbo1.FutureIndexi')
 # FutureWide = class_factory('dscbo1.FutureWide')
 # FutureMo1 = class_factory('dscbo1.FutureMo1')
@@ -160,7 +159,6 @@
 # FutOptRest = class_factory('dscbo1.FutOptRest')
 # ExpectIndexR = class_factory('dscbo1.ExpectIndexR')
 # ExpectIndexS = class_factory('dscbo1.ExpectIndexS')
-# FutureCurOnly = class_factory('dscbo1.FutureCurOnly')
 # CpSvrNew8300 = class_factory('dscbo1.CpSvrNew8300')
 # CmeConclusionRt = class_factory('dscbo1.CmeConclusionRt')
 # EurexConclusionRt = class_factory('dscbo1.EurexConclusionRt')
@@ -244,3 +242,5 @@
 
 # ('CpSysDib.FutureJpBid')
 # ('CpSysDib.OptionJpBid')
+# 'dscbo1.FutureCurOnly'
+# Deleted - ('dscbo1.FutureCurr')

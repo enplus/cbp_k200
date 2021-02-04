@@ -17,7 +17,7 @@ class EurexJpbid:
     def setInitData(self, itm_cod=None, evntProc=None):
         self.itm_cod = itm_cod
         self.eproc = evntProc
-        print('# STKBID Init: %s' % self.itm_cod)
+        print('# EUREXBID Init: %s' % self.itm_cod)
 
     def subscribe(self, com_obj):
         com_obj.Unsubscribe()
@@ -51,7 +51,7 @@ class EurexJpbid:
 
         # # 이벤트 처리기에 전달
         # if self.eproc is not None:
-        #     self.eproc.push('stkbid_%s' % itm_cod, tlist)
+        #     self.eproc.push('eurexbid_%s' % itm_cod, tlist)
 
 
 @CpRqRp('dscbo1.FutureMst')
@@ -190,7 +190,7 @@ class FutureJpbid:
 
         # # # 이벤트 처리기에 전달
         if self.eproc is not None:
-            self.eproc.push(key='stkbid_%s' % itm_cod, data=data)
+            self.eproc.push(key='futbid_%s' % itm_cod, data=data)
 
 
 @CpSbPb('CpSysDib.OptionJpBid')
@@ -234,9 +234,10 @@ class OptionJpbid:
 
         # 이벤트 처리기에 전달
         if self.eproc is not None:
-            self.eproc.push('stkbid_%s' % itm_cod, tlist)
+            self.eproc.push('optbid_%s' % itm_cod, tlist)
 
-@CpSbPb('dscbo1.FutureCurr')
+
+@CpSbPb('dscbo1.FutureCurOnly')
 class FutureCur:
     def __init__(self):
         self.itm_cod = None
@@ -274,6 +275,21 @@ class FutureCur:
         #         com_obj.GetHeaderValue(i+3)
         #     )
         #     tlist.append(itm)
+
+        itm_cod = com_obj.GetHeaderValue(0)
+        time = com_obj.GetHeaderValue(15)
+
+        onpr = com_obj.GetHeaderValue(7)
+        hipr = com_obj.GetHeaderValue(8)
+        lopr = com_obj.GetHeaderValue(9)
+        clpr = com_obj.GetHeaderValue(1)
+
+        sllbuy = '매도' if com_obj.GetHeaderValue(24) == '2' else '매수'
+        clsqty = com_obj.GetHeaderValue(14)
+
+        # 이벤트처리기에 전달
+        self.evntproc.push('cls_%s'% (itm_cod), (nowpr, chr(sllbuy), clsqty))
+
 
         # 이벤트 처리기에 전달
         if self.eproc is not None:
